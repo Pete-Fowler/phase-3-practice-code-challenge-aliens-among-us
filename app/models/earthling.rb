@@ -12,4 +12,12 @@ class Earthling < ActiveRecord::Base
     end 
   end 
 
+  def full_name
+    self.first_name + ' ' + self.last_name
+  end 
+
+  def self.filter_by_job(job)
+    Earthling.where("job LIKE ?","%#{job}%")  
+  end
+
 end
