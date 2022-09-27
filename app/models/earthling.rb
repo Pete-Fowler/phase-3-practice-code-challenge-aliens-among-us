@@ -3,6 +3,13 @@ class Earthling < ActiveRecord::Base
   has_many :aliens, through: :visitations
 
   def visitations
-    self.visitations 
+    Visitation.where(earthling_id: self.id)  
   end
+
+  def aliens
+    self.visitations.map do |v| 
+      Alien.where(id: v.alien_id) 
+    end 
+  end 
+
 end
